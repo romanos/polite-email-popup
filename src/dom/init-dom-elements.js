@@ -6,6 +6,7 @@ import initElemGlobals from "./init-elem-globals";
 import getStylesString from "../helpers/get-styles-string";
 
 export default function initDomElements () {
+  // No Styles for Bootstrap, just debug bar
   addHtmlToPage(getStylesString());
 
   if (temporaryGlobals.showDebugNotice) {

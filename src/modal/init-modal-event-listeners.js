@@ -7,13 +7,13 @@ export default function initModalEventListeners () {
   // when user goes to exit the page, if politeness rules are met, show modal
   initExitIntent();
   // when backdrop clicked, close modal
-  temporaryGlobals.MODAL_ELEM.addEventListener("click", onClickModalBackdrop);
+  // temporaryGlobals.MODAL_ELEM.addEventListener("click", onClickModalBackdrop);
   // when email form submitted, call onSubmit callback and close modal
   temporaryGlobals.MODAL_FORM_ELEM.addEventListener("submit", onSubmit);
   // when modal close button clicked, close modal
-  temporaryGlobals.MODAL_CLOSE_BUTTON_ELEM.addEventListener('click', closeModal);
+  // temporaryGlobals.MODAL_CLOSE_BUTTON_ELEM.addEventListener('click', closeModal);
   // when Esc key is pressed, close modal
-  document.addEventListener("keydown", onKeyDown);
+  // document.addEventListener("keydown", onKeyDown);
 }
 
 function onKeyDown (event) {

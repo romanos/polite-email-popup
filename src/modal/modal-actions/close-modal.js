@@ -11,26 +11,31 @@ export default function closeModal() {
   // store date it was clsoed
   persistentGlobals.modalClosedDate = Date.now();
 
+  $(temporaryGlobals.MODAL_ELEM).modal('hide');
+
   // hide the modal
-  temporaryGlobals.MODAL_ELEM.classList.remove("show");
+  // temporaryGlobals.MODAL_ELEM.classList.remove("show");
   // remove body class
-  document.body.classList.remove(temporaryGlobals.BODY_CLASS_MODAL_OPEN);
+  // document.body.classList.remove(temporaryGlobals.BODY_CLASS_MODAL_OPEN);
 
-  // Untrap the tab focus by removing tabindex=-1. You should restore previous values if an element had them.    
-  const focusableElements = document.querySelectorAll(temporaryGlobals.FOCUSABLE_SELECTORS);
-  focusableElements.forEach(el => el.removeAttribute('tabindex'));
-  
-  // Untrap screen reader focus
-  const topLevelElements = document.querySelectorAll("body > [aria-hidden]");
-  topLevelElements.forEach(el => el.removeAttribute('aria-hidden'));
-  temporaryGlobals.MODAL_ELEM.setAttribute('aria-hidden', 'true');
-  
-  // restore focus to the triggering element
-  if (temporaryGlobals.activeElement) {
-    temporaryGlobals.activeElement.focus();
-  }
+  $(temporaryGlobals.MODAL_ELEM).on('hidden.bs.modal',function(e){
+    // Untrap the tab focus by removing tabindex=-1. You should restore previous values if an element had them.    
+    const focusableElements = document.querySelectorAll(temporaryGlobals.FOCUSABLE_SELECTORS);
+    focusableElements.forEach(el => el.removeAttribute('tabindex'));
+    
+    // Untrap screen reader focus
+    // const topLevelElements = document.querySelectorAll("body > [aria-hidden]");
+    // topLevelElements.forEach(el => el.removeAttribute('aria-hidden'));
+    // temporaryGlobals.MODAL_ELEM.setAttribute('aria-hidden', 'true');
+    
+    // restore focus to the triggering element
+    if (temporaryGlobals.activeElement) {
+      temporaryGlobals.activeElement.focus();
+    }
 
-  enableBodyScroll(temporaryGlobals.MODAL_ELEM);
+  });
+
+  // enableBodyScroll(temporaryGlobals.MODAL_ELEM);
 
   temporaryGlobals.isModalOpen = false;
   // manually recompute `isModalOpenable` because temporary globals don't trigger this automatically
