@@ -6,7 +6,7 @@ import closeBottomBar from "../../bottom-bar/bottom-bar-actions/close-bottom-bar
 
 export default function closeModal() {
   // close bottom bar whenever the modal is closed, but don't overwrite its previous close date (if any)
-  closeBottomBar({dontRecordCloseDate: true});
+  closeBottomBar(false, {dontRecordCloseDate: true});
 
   // store date it was clsoed
   persistentGlobals.modalClosedDate = Date.now();
