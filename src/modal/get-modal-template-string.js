@@ -1,4 +1,11 @@
-export default function getModalTemplateString ({imageSrc, headingText, descriptionText, mainButtonText}) {
+export default function getModalTemplateString ({imageSrc, headingText, descriptionText, mainButtonText, serverConfig}) {
+  let button;
+  if (serverConfig && serverConfig.reCaptchaKey) {
+    button = `<button class="g-recaptcha btn btn-primary email-modal__sign-up" data-callback='onSubmitModal' data-sitekey="${serverConfig.reCaptchaKey}">${mainButtonText}</button>`;
+  } else {
+    button = `<button class="btn btn-primary email-modal__sign-up" type="submit">${mainButtonText}</button>`;
+  }
+
   return `
 <!-- Modal -->
 <div class="modal email-modal fade onboarding-modal animated" id="email-modal" tabindex="-1" role="dialog" aria-labelledby="email-modal-title" aria-hidden="true" aria-describedby="email-modal-description">
@@ -27,7 +34,7 @@ export default function getModalTemplateString ({imageSrc, headingText, descript
             </div>
           </div>
           <div class="email-modal__button-container text-center">
-            <button class="btn btn-primary email-modal__sign-up" type="submit">${mainButtonText}</button>
+            ${button}
             <button type="button" class="btn btn-white email-modal__close" data-dismiss="modal">No Thanks</button>
           </div>
         </form>

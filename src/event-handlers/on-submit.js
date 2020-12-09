@@ -28,8 +28,8 @@ export function onSubmit (event) {
   let emailInputElement = event.currentTarget.querySelector(temporaryGlobals.SELECTORS.BOTTOM_BAR_FORM_INPUT_ELEM_SELECTOR);
   let email = emailInputElement.value;
 
-  if (temporaryGlobals.serverConfig && temporaryGlobals.serverConfig.token && temporaryGlobals.serverConfig.formAction) {
-    // MAILCHIMP integration
+  if (temporaryGlobals.serverConfig && temporaryGlobals.serverConfig.token && temporaryGlobals.serverConfig.formAction) {    
+    // SERVER integration
     sendEmailToServer({
       event, 
       email, 

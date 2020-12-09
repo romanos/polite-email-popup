@@ -1,4 +1,11 @@
-export default function getBottomBarTemplateString ({headingText, mainButtonText, closeButtonText}) {
+export default function getBottomBarTemplateString ({headingText, mainButtonText, closeButtonText, serverConfig}) {
+  let button;
+  if (serverConfig && serverConfig.reCaptchaKey) {
+    button = `<button class="g-recaptcha btn btn-primary mx-1" data-callback='onSubmitBottomBar' data-sitekey="${serverConfig.reCaptchaKey}">${mainButtonText}</button>`;
+  } else {
+    button = `<button class="btn btn-primary mx-1" type="submit">${mainButtonText}</button>`;
+  }
+
   return `<div class="bottom-bar p-3">
   <button type="button" class="close d-block d-md-none pull-right bottom-bar__close" aria-label="Close">
     <span aria-hidden="true">&times;</span>
@@ -6,8 +13,7 @@ export default function getBottomBarTemplateString ({headingText, mainButtonText
   <form class="bottom-bar__content form-inline d-flex flex-row justify-content-center" method="POST" action="/">
     <label class="mx-1" for="bottom-bar-email">${headingText}</label>
     <input id="bottom-bar-email" class="form-control mx-1 col-md-3 col-6 email-signup-form-input" type="email" name="EMAIL" value="" placeholder="Your email address" required>
-    <button class="btn btn-primary mx-1" type="submit">${mainButtonText}</button>
-    <a href='#' class="btn btn-white d-none d-md-block mx-1 bottom-bar__close">${closeButtonText}</a>
+    ${button}<a href='#' class="btn btn-white d-none d-md-block mx-1 bottom-bar__close">${closeButtonText}</a>
     <div style="position: absolute; left: -5000px;" aria-hidden="true">
       <input class="js-validate-not-robot" type="text" tabindex="-1" value="" autocomplete="off">
     </div>
